@@ -13,7 +13,25 @@ struct Meal {
     var calories: Int
 }
 
-var meals: [String: Meal] = ["Breakfast": Meal(food: ["Bagel", "Orange Juice", "Egg Whites"], calories: 530)]
+var meals: [String: Meal] = [
+    "Breakfast": Meal(food: ["Bagel", "Orange Juice", "Egg Whites"], calories: 530)
+]
+
+func getMeal(for mealName: String) -> Meal? {
+    return meals[mealName]
+}
+
+if let breakfast = getMeal(for: "Breakfast") {
+    print("Breakfast: \(breakfast.food), Calories: \(breakfast.calories)")
+} else {
+    print("Meal not logged.")
+}
+
+if let dinner = getMeal(for: "Dinner") {
+    print("Dinner: \(dinner.food), Calories: \(dinner.calories)")
+} else {
+    print("Meal not logged.")
+}
 
 
 /*:
@@ -21,6 +39,17 @@ var meals: [String: Meal] = ["Breakfast": Meal(food: ["Bagel", "Orange Juice", "
  
  Write a function that will check to see if your meal log (a dictionary like that in the previous exercise) is saved to the device. If it is, return the meal log. If it isn't, return an empty dictionary of type `[String: Any]`. The code you should use in this exercise for retrieving something saved to the device is `UserDefaults.standard.dictionary(forKey: "mealLog")`. This code will return an optional `[String: Any]`. If it returns a value, that is your meal log. If it returns `nil`, then no meal log has been saved. Call the function and print the return value.
  */
+func fetchSavedMealLog() -> [String: Any] {
+    if let savedLog = UserDefaults.standard.dictionary(forKey: "mealLog") {
+        return savedLog
+    } else {
+        return [:] 
+    }
+}
+
+// Example usage:
+let mealLog = fetchSavedMealLog()
+print("Saved meal log: \(mealLog)")
 
 
 /*:

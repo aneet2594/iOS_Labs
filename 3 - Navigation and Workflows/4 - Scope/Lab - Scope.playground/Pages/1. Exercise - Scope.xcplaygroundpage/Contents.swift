@@ -49,7 +49,6 @@ class Car {
     }
 }
 
-// Example usage
 let car1 = Car(make: "Toyota", model: "Corolla", year: 2020)
 print("Car: \(car1.make) \(car1.model), Year: \(car1.year)")
 

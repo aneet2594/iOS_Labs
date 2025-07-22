@@ -4,9 +4,49 @@ import UIKit
 
  Imagine you want to write a function to calculate the area of a rectangle. However, if you pass a negative number into the function, you don't want it to calculate a negative area. Create a function called `calculateArea` that takes two `Double` parameters, `x` and `y`, and returns an optional `Double`. Write a guard statement at the beginning of the function that verifies each of the parameters is greater than zero and returns `nil` if not. When the guard has succeeded, calculate the area by multiplying `x` and `y` together, then return the area. Call the function once with positive numbers and once with at least one negative number.
  */
+func calculateArea(x: Double, y: Double) -> Double? {
+    guard x > 0, y > 0 else {
+        return nil
+    }
+    
+    let area = x * y
+    return area
+}
+
+if let area1 = calculateArea(x: 5.0, y: 10.0) {
+    print("Area1: \(area1)")
+} else {
+    print("Area1: Invalid input")
+}
+
+if let area2 = calculateArea(x: -5.0, y: 10.0) {
+    print("Area2: \(area2)")
+} else {
+    print("Area2: Invalid input")
+}
 
 
 //:  Create a function called `add` that takes two optional integers as parameters and returns an optional integer. You should use one `guard` statement to unwrap both optional parameters, returning `nil` in the `guard` body if one or both of the parameters doesn't have a value. If both parameters can successfully be unwrapped, return their sum. Call the function once with non-`nil` numbers and once with at least one parameter being `nil`.
+func add(_ a: Int?, _ b: Int?) -> Int? {
+    guard let num1 = a, let num2 = b else {
+        return nil
+    }
+    
+    return num1 + num2
+}
+
+// Test cases
+if let result1 = add(3, 7) {
+    print("Result1: \(result1)")
+} else {
+    print("Result1: Invalid input")
+}
+
+if let result2 = add(nil, 5) {
+    print("Result2: \(result2)")
+} else {
+    print("Result2: Invalid input")  
+}
 
 
 /*:
@@ -14,6 +54,8 @@ import UIKit
 
  Write a function below the given code called `createUser` that takes no parameters and returns an optional `User` object. Write a guard statement at the beginning of the function that unwraps the values of each text field's `text` property, and returns `nil` if not all values are successfully unwrapped. After the guard statement, use the unwrapped values to create and return and instance of `User`.
  */
+import UIKit
+
 struct User {
     var firstName: String
     var lastName: String
@@ -29,8 +71,25 @@ lastNameTextField.text = "Huang"
 ageTextField.text = "28"
 
 
-
 //:  Call the function you made above and capture the return value. Unwrap the `User` with standard optional binding and print a statement using each of its properties.
+func createUser() -> User? {
+    guard
+        let firstName = firstNameTextField.text,
+        let lastName = lastNameTextField.text,
+        let age = ageTextField.text
+    else {
+        return nil
+    }
+
+    return User(firstName: firstName, lastName: lastName, age: age)
+}
+
+
+guard let user = createUser() else {
+    print("Failed to create user.")
+    return
+}
+print("User created: \(user.firstName) \(user.lastName), Age: \(user.age)")
 
 
 /*:

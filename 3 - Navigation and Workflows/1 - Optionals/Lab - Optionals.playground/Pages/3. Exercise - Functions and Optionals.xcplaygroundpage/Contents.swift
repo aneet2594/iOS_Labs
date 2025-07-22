@@ -5,14 +5,46 @@
  */
 let userInputAge: String = "34e"
 
+func checkAge(_ age: String) -> Int? {
+    if let ageInt = Int(age) {
+        if ageInt > 18 {
+            print("Welcome!")
+        } else {
+            print("Sorry, but you aren't old enough to use our app.")
+        }
+        return ageInt
+    } else {
+        print("Sorry, something went wrong. Can you please re-enter your age?")
+        return nil
+    }
+}
 
 //:  Go back and update your function to return the age as an integer. Will your function always return a value? Make sure your return type accurately reflects this. Call the function and print the return value.
-
+let userAge = "34"
+if let returnedAge = checkAge(userAge) {
+    print("User age is \(returnedAge)")
+} else {
+    print("Invalid age entered.")
+}
 
 //:  Imagine you are creating an app for making purchases. Write a function that will take in the name of an item for purchase as a `String` and will return the cost of that item as an optional `Double`. In the body of the function, check to see if the item is in stock by accessing it in the dictionary `stock`. If it is, return the price of the item by accessing it in the dictionary `prices`. If the item is out of stock, return `nil`. Call the function and pass in a `String` that exists in the dictionaries below. Print the return value.
-var prices = ["Chips": 3.69, "Donuts": 1.89, "Juice": 4.99, "Apple": 0.70, "Banana": 0.53, "Broccoli": 1.99]
-var stock = ["Chips": 4, "Donuts": 0, "Juice": 12, "Apple": 6, "Banana": 6, "Broccoli": 3]
+let prices = ["Chips": 3.69, "Donuts": 1.89, "Juice": 4.99, "Apple": 0.70, "Banana": 0.53, "Broccoli": 1.99]
+let stock = ["Chips": 4, "Donuts": 0, "Juice": 12, "Apple": 6, "Banana": 6, "Broccoli": 3]
 
+func purchase(item: String) -> Double? {
+    if let itemStock = stock[item], itemStock > 0 {
+        return prices[item]
+    } else {
+        return nil
+    }
+}
+
+// Example usage
+if let cost = purchase(item: "Donuts") {
+    print("The cost is $\(cost)")
+} else {
+    print("Item is out of stock or doesn't exist.")
+}
 
 /*:
 [Previous](@previous)  |  page 3 of 6  |  [Next: App Exercise - Food Functions](@next)
